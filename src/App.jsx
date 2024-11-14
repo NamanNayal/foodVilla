@@ -11,6 +11,7 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart";  
 import RestaurantMenu from "./components/RestaurantMenu";
+import Profile from "./components/Profile";
 
 // Define the layout of your application
 const AppLayout = () => {
@@ -36,7 +37,14 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />
+        element: <About />,
+        children:[
+          {
+            path: "profile",
+            element: <Profile/>
+            
+          }
+        ]
       },
       {
         path: "/contact",
@@ -59,7 +67,7 @@ const appRouter = createBrowserRouter([
 const App = () => {
   return (
     <RouterProvider router={appRouter} />  // Provide router configuration here
-  );
+  ); 
 };
 
 export default App;
