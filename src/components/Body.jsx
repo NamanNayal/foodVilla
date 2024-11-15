@@ -2,12 +2,9 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import {Link} from "react-router-dom";
 import Shimmer from "./Shimmer";
+import { filterData } from "../utils/helper";
 
-function filterData(searchText, allRestaurants) {
-    return allRestaurants.filter((restaurant) =>
-        restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-    );
-}
+ 
 
 const Body = () => {
     const [allRestaurants, setAllRestaurants] = useState([]);
@@ -38,6 +35,7 @@ const Body = () => {
         }
     }
 
+  
     if (loading) return <Shimmer />;  // Render Shimmer while loading is true
 
     return (

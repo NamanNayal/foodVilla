@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
+
 
 const Title = () => {
     return(
@@ -12,6 +14,8 @@ const Title = () => {
   };
  
 const Header = () =>{
+
+  const isOnline = useOnline();  // Importing custom hook from utils folder to check if the device is online or offline.
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -32,8 +36,12 @@ const Header = () =>{
               <Link to= "/Cart">
               <li> Cart </li>
               </Link>
+              <Link to="/Instamart">
+              <li>InstaMart</li>
+              </Link>
             </ul>
         </div>
+        <h2>{isOnline ? "🟢": "🔴" }</h2>
         {isLoggedIn ?<button onClick = {()=> setIsLoggedIn(false)}>Logout</button>:<button onClick = {()=> setIsLoggedIn(true)}>Login</button> }
         
         

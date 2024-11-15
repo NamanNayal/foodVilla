@@ -4,26 +4,13 @@ import { useEffect, useState } from 'react';
 import { IMG_CON_URL } from '../constant';
 import Shimmer from './Shimmer';
 import { MENU_API } from '../constant';
+import useRestaurant from '../utils/useRestaurant';
 
 function RestaurantMenu() {
   //how to read a dynamic url
-    const [restaurant, setRestaurant] = useState(null);
-
-    
     const {resId} = useParams(); 
 
-
-    
-    useEffect(()=>{
-        getRestaurantInfo();
-    },[]);
-
-    async function getRestaurantInfo() {
-        const data = await fetch(MENU_API + resId);
-        const json = await data.json();
-        console.log(json);
-        setRestaurant(json.data);
-    }
+    const restaurant = useRestaurant(resId);
 
     if (restaurant === null) return <Shimmer />;
 
