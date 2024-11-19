@@ -39,39 +39,44 @@ const Body = () => {
     if (loading) return <Shimmer />;  // Render Shimmer while loading is true
 
     return (
-        <>
-            <div className="search-container">
-                <input
-                    type="text"
-                    className="search-input"
-                    placeholder="Search"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                />
-                <button
-                    className="search-btn"
-                    onClick={() => {
-                        const data = filterData(searchText, allRestaurants);
-                        setFilteredRestaurants(data);
-                    }}
+        <div className="bg-c1 px-4 ">
+          <div className="flex items-center justify-center bg-c1 py-4 px-4 space-x-4">
+            <input
+              type="text"
+              className=" p-2 w-72 rounded-md shadow-lg shadow-black "
+              placeholder="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button
+              className="p-2 bg-c2 text-black rounded-md hover:bg-c3 shadow-lg shadow-black"
+              onClick={() => {
+                const data = filterData(searchText, allRestaurants);
+                setFilteredRestaurants(data);
+              }}
+            >
+              Search 🔍
+            </button>
+          </div>
+    
+          {filteredRestaurants.length === 0 ? (
+            <h2>No restaurant found</h2>
+          ) : (
+            <div className=" flex flex-wrap justify-evenly justify-items-center ">
+              {filteredRestaurants.map((restaurant) => (
+                <Link
+                  to={"/restaurant/" + restaurant.info.id}
+                  key={restaurant.info.id}
                 >
-                    Search
-                </button>
+                
+                  <RestaurantCard {...restaurant.info} />
+                
+                </Link>
+              ))}
             </div>
-
-            {filteredRestaurants.length === 0 ? (
-                <h2>No restaurant found</h2>
-            ) : (
-                <div className="restaurant-list">
-                    {filteredRestaurants.map((restaurant) => (
-                        <Link to={"/restaurant/" + restaurant.info.id}  key={restaurant.info.id}>
-                        <RestaurantCard {...restaurant.info} />
-                        </Link>
-                    ))}
-                </div>
-            )}
-        </>
-    );
+          )}
+        </div>
+      );
 };
 
 export default Body;

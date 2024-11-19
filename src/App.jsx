@@ -1,8 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import './App.css';
-import './index.css';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";  
@@ -16,10 +15,11 @@ const Instamart = lazy(()=> import("./components/Instamart"));
 
 const About =  lazy(() => import("./components/About"))
 
+
 // Define the layout of your application
 const AppLayout = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-c1">
       <Header />
       <Outlet/>
       <Footer />
