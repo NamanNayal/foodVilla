@@ -2,6 +2,9 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Component } from 'react'
 import ProfileClass from './ProfileClass';
+import UserContext from '../utils/UserContext';
+
+//we dont have a userContext which a hook in class based components
 class About extends Component{
   //initialize all the state variables in constructor as it is the first thing called by default
   constructor(props){
@@ -16,6 +19,13 @@ class About extends Component{
     return (
       <div>
           <h1>About us page</h1>
+          <UserContext.Consumer>
+            {({user})=>(<h1>
+              {user.name}-{user.email}
+            </h1>
+
+            )}
+          </UserContext.Consumer>
           <Outlet />
           <ProfileClass />
         

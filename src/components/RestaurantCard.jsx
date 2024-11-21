@@ -1,4 +1,6 @@
 import { IMG_CON_URL } from "../constant";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard = ({
     name, 
@@ -9,6 +11,7 @@ const RestaurantCard = ({
     costForTwo,
     
     }) => {
+      const {user} = useContext(UserContext);
     return(
       <div className="w-[250px] p-2 m-2 shadow-lg shadow-black bg-c2 text-blacka rounded-md hover:bg-c3">
   
@@ -18,6 +21,7 @@ const RestaurantCard = ({
         <h4>{avgRating}⭐</h4>
         <h4>{costForTwo}</h4>
         <h4>{areaName}</h4>
+        <h4>{user.name}</h4>
         
 
 

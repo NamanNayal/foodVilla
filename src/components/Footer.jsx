@@ -1,5 +1,14 @@
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 const Footer = ()=> {
-    return <h5>Footer</h5>
+    const {user} = useContext(UserContext);
+    return (
+    <div>
+    <h5>Footer</h5>
+    <h5>{user.name}</h5>
+    </div>
+    )
+
   }
 
   
