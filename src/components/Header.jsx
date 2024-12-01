@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import Logo from "../assets/foodVillaLogo.png";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 
 const Title = () => {
@@ -21,6 +22,9 @@ const Header = () =>{
 
   const {user} = useContext(UserContext);
 
+  const cartItems = useSelector(store => store.cart.items);
+  
+
   return (
     <div className="flex justify-between bg-c4 text-white px-4 py-4 s">
       <Title />
@@ -35,11 +39,11 @@ const Header = () =>{
           <Link to="/Contact">
             <li className="hover:text-c2 hover:text-lg">Contact</li>
           </Link>
-          <Link to="/Cart">
-            <li className="hover:text-c2 hover:text-lg">Cart</li>
-          </Link>
           <Link to="/Instamart">
             <li className="hover:text-c2 hover:text-lg">Instamart</li>
+          </Link>
+          <Link to="/Cart">
+            <li className="hover:text-c2 hover:text-lg">Cart-{cartItems.length}</li>
           </Link>
         </ul>
       </div>

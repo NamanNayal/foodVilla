@@ -14,8 +14,8 @@ import Shimmer from "./components/Shimmer";
 const Instamart = lazy(()=> import("./components/Instamart"));
 const About =  lazy(() => import("./components/About"));
 import UserContext from "./utils/UserContext";
-
-
+import {Provider} from "react-redux";
+import store from "./utils/store";
 
 // Define the layout of your application
 const AppLayout = () => {
@@ -24,7 +24,7 @@ const AppLayout = () => {
     email: "naman@example.com",
   });
   return (
-    <div className="min-h-screen bg-c1">
+      <Provider store = {store}> 
       <UserContext.Provider
       value = {{
         user : user,
@@ -34,7 +34,7 @@ const AppLayout = () => {
       <Outlet/>
       <Footer />
       </UserContext.Provider>
-    </div>
+      </Provider>
   );
 };
 

@@ -5,12 +5,16 @@ import { IMG_CON_URL } from '../constant';
 import Shimmer from './Shimmer';
 import { MENU_API } from '../constant';
 import useRestaurant from '../utils/useRestaurant';
+import {addItem} from '../utils/cartSlice';
+import { useDispatch } from 'react-redux';
 
 function RestaurantMenu() {
   //how to read a dynamic url
     const {resId} = useParams(); 
+    const dispatch = useDispatch(); 
 
     const restaurant = useRestaurant(resId);
+
 
     if (restaurant === null) return <Shimmer />;
 
@@ -24,14 +28,21 @@ function RestaurantMenu() {
     restaurant?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards || [];
 
 
+    
+    
+    // dispatch an anction and then attach payload to it
+    const addFoodItem = (item) =>{
+       dispatch(addItem(item));
+    }
+
 
 
 
     return (
-      <div className="menu">
+      <div className="flex">
         <div >
           <h2>{name}</h2>
-          <img className="menu-image" src={IMG_CON_URL + cloudinaryImageId} alt="Image" />
+          <img className="w-52 h-52" src={IMG_CON_URL + cloudinaryImageId} alt="Image" />
           <h3>{areaName}</h3>
           <h3>{city}</h3>
           <h3>{avgRating} stars</h3>
@@ -47,6 +58,7 @@ function RestaurantMenu() {
                 {item?.card?.info?.name} -{" Rs."}
                 {item?.card?.info?.price / 100 ||
                   item?.card?.info?.defaultPrice / 100}
+                  <button className='p-1 bg-green-600' onClick={()=> addFoodItem(item)}> Add</button>
               </li>
             ))}
           </ul>
